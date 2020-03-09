@@ -1,4 +1,5 @@
 const router = require('express').Router();
+module.exports = router;
 
 router.get('/', (req, res, next) => {
   res.send('Hello world');
@@ -15,5 +16,3 @@ router.put('/:userId', (req, res, next) => {
 router.delete('/:userId', (req, res, next) => {
   res.send('Goodbye world');
 });
-
-module.exports = router;

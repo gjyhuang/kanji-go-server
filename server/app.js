@@ -3,6 +3,7 @@ const app = express();
 const morgan = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
+const compression = require('compression');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./db');
 const PORT = process.env.PORT || 1337;
@@ -10,12 +11,34 @@ const dbStore = new SequelizeStore({ db: db });
 
 module.exports = app;
 
+// Global Mocha hook, used for resource cleanup.
+if (process.env.NODE_ENV === 'test') {
+  after('close the session store', () => sessionStore.stopExpiringSessions());
+}
+
+if (process.env.NODE_ENV !== 'production') require('../secrets');
+
+// Passport registration //
+passport.serializeUser((user, done) => done(null, user.id));
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await db.models.user.findByPk(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
+
 const createApp = () => {
   // Logging middleware //
   app.use(morgan('dev'));
   // Body-parsing middleware //
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
+  // Compression middleware //
+  app.use(compression());
+
   // Static file serving middleware. Uncomment this when ready.
   // app.use(express.static(path.join(__dirname, './path/to/static/assets')));
 
@@ -38,6 +61,10 @@ const createApp = () => {
   // Initialize passport //
   app.use(passport.initialize());
   app.use(passport.session());
+
+  // Auth and API routes //
+  app.use('/auth', require('./auth'));
+  app.use('/api', require('./api'));
 
   // Error handling middleware //
   app.use((err, req, res, next) => {
