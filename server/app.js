@@ -25,6 +25,7 @@ const createApp = () => {
   // });
 
   // Session middleware //
+  dbStore.sync();
   app.use(
     session({
       secret: process.env.SESSION_SECRET || 'a wildly insecure secret',
@@ -33,6 +34,10 @@ const createApp = () => {
       saveUninitialized: false,
     })
   );
+
+  // Initialize passport //
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   // Error handling middleware //
   app.use((err, req, res, next) => {
