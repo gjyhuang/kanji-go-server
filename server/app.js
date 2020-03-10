@@ -4,10 +4,11 @@ const morgan = require('morgan');
 const session = require('express-session');
 const passport = require('passport');
 const compression = require('compression');
+const bodyParser = require('body-parser');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const db = require('./db');
+const db = require('./db/db');
 const PORT = process.env.PORT || 1337;
-const dbStore = new SequelizeStore({ db: db });
+const sessionStore = new SequelizeStore({ db: db });
 
 module.exports = app;
 
@@ -48,11 +49,11 @@ const createApp = () => {
   // });
 
   // Session middleware //
-  dbStore.sync();
+  sessionStore.sync();
   app.use(
     session({
       secret: process.env.SESSION_SECRET || 'a wildly insecure secret',
-      store: sessionStorage,
+      store: sessionStore,
       resave: false,
       saveUninitialized: false,
     })
@@ -63,8 +64,8 @@ const createApp = () => {
   app.use(passport.session());
 
   // Auth and API routes //
-  app.use('/auth', require('./auth'));
-  app.use('/api', require('./api'));
+  app.use('/auth', require('./auth/auth'));
+  app.use('/api', require('./api/index'));
 
   // Error handling middleware //
   app.use((err, req, res, next) => {
