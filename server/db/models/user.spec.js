@@ -1,5 +1,6 @@
 const { expect } = require('chai');
 const db = require('../db');
+
 const User = db.model('user');
 
 describe('User Model', () => {
@@ -14,12 +15,12 @@ describe('User Model', () => {
       beforeEach(async () => {
         grace = await User.create({
           email: 'grace@doesmagic.com',
-          password: 'asdfghjkl',
+          password: 'mikeIsCute',
         });
       });
 
       it('returns true if the password is correct', () => {
-        expect(grace.correctPassword('asdfghjkl').to.be.equal(true));
+        expect(grace.correctPassword('mikeIsCute').to.be.equal(true));
       });
 
       it('returns false if the password is incorrect', () => {

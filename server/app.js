@@ -1,4 +1,5 @@
 const express = require('express');
+
 const app = express();
 const morgan = require('morgan');
 const session = require('express-session');
@@ -6,13 +7,14 @@ const passport = require('passport');
 const compression = require('compression');
 const bodyParser = require('body-parser');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const db = require('./db/db');
+const db = require('./db');
+
 const PORT = process.env.PORT || 1337;
-const sessionStore = new SequelizeStore({ db: db });
+const sessionStore = new SequelizeStore({ db });
 
 module.exports = app;
 
-// Global Mocha hook, used for resource cleanup.
+// Global Mocha hook, used for resource cleanup. //
 if (process.env.NODE_ENV === 'test') {
   after('close the session store', () => sessionStore.stopExpiringSessions());
 }
