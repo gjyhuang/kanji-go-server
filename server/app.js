@@ -40,10 +40,10 @@ const createApp = () => {
   // Compression middleware //
   app.use(compression());
 
-  // Static file serving middleware. Uncomment this when ready.
-  // app.use(express.static(path.join(__dirname, './path/to/static/assets')));
+  // Static file serving middleware. Uncomment this when ready. //
+  // app.use(express.static(path.join(__dirname, '..', 'public')));
 
-  // Sends our index.html. Uncomment when ready.
+  // Sends our index.html. Uncomment when ready. //
   // app.get('*', (req, res) => {
   //   res.sendFile(path.join(__dirname, '../public/index.html'));
   // });
@@ -64,8 +64,8 @@ const createApp = () => {
   app.use(passport.session());
 
   // Auth and API routes //
-  app.use('/auth', require('./auth/auth'));
-  app.use('/api', require('./api/index'));
+  app.use('/auth', require('./auth'));
+  app.use('/api', require('./api'));
 
   // Error handling middleware //
   app.use((err, req, res, next) => {
