@@ -79,9 +79,7 @@ const createApp = () => {
 
 const startListening = () => {
   // Start listening (and create a 'server' object representing our server)
-  const server = app.listen(PORT, () =>
-    console.log(`Mixing it up on port ${PORT}`)
-  );
+  app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`));
 };
 
 const syncDb = () => db.sync();
