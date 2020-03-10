@@ -4,7 +4,7 @@
   "description": "A simple, lightweight boilerplate for backend services in ExpressJS",
   "main": "server/app.js",
   "scripts": {
-    "start": "nodemon server/app.js",
+    "start": "NODE_ENV='development' nodemon server/app.js",
     "test": "NODE_ENV='test' mocha \"./server/**/*.spec.js\"",
     "lint": "eslint ./ --ignore-path .gitignore",
     "lint-fix": "npm run lint -- --fix",
@@ -77,6 +77,7 @@
     "mocha": "^7.1.0",
     "nodemon": "^2.0.2",
     "prettier": "^1.19.1",
+    "supertest": "^4.0.2",
     "yaml": "^1.8.0"
   }
 }

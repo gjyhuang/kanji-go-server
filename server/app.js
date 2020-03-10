@@ -1,5 +1,4 @@
 const express = require('express');
-
 const app = express();
 const morgan = require('morgan');
 const session = require('express-session');
@@ -8,6 +7,7 @@ const compression = require('compression');
 const bodyParser = require('body-parser');
 const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const db = require('./db');
+// const path = require('path');
 
 const PORT = process.env.PORT || 1337;
 const sessionStore = new SequelizeStore({ db });

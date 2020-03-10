@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const db = require('../db');
+const db = require('../index');
 
 const User = db.model('user');
 
@@ -20,11 +20,11 @@ describe('User Model', () => {
       });
 
       it('returns true if the password is correct', () => {
-        expect(grace.correctPassword('mikeIsCute').to.be.equal(true));
+        expect(grace.correctPassword('mikeIsCute')).to.be.equal(true);
       });
 
       it('returns false if the password is incorrect', () => {
-        expect(grace.correctPassword('iLoveMyNeighbors').to.be.equal(false));
+        expect(grace.correctPassword('iLoveMyNeighbors')).to.be.equal(false);
       });
     }); // end describe 'correctPassword'
   }); // end describe 'instanceMethods'
