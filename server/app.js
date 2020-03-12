@@ -1,12 +1,12 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const morgan = require('morgan');
-const session = require('express-session');
-const passport = require('passport');
-const compression = require('compression');
-const bodyParser = require('body-parser');
-const SequelizeStore = require('connect-session-sequelize')(session.Store);
-const db = require('./db');
+const morgan = require("morgan");
+const session = require("express-session");
+const passport = require("passport");
+const compression = require("compression");
+const bodyParser = require("body-parser");
+const SequelizeStore = require("connect-session-sequelize")(session.Store);
+const db = require("./db");
 // const path = require('path');
 
 const PORT = process.env.PORT || 1337;
@@ -15,11 +15,11 @@ const sessionStore = new SequelizeStore({ db });
 module.exports = app;
 
 // Global Mocha hook, used for resource cleanup. //
-if (process.env.NODE_ENV === 'test') {
-  after('close the session store', () => sessionStore.stopExpiringSessions());
+if (process.env.NODE_ENV === "test") {
+  after("close the session store", () => sessionStore.stopExpiringSessions());
 }
 
-if (process.env.NODE_ENV !== 'production') require('../secrets');
+// if (process.env.NODE_ENV !== 'production') require('../secrets');
 
 // Passport registration //
 passport.serializeUser((user, done) => done(null, user.id));
@@ -35,7 +35,7 @@ passport.deserializeUser(async (id, done) => {
 
 const createApp = () => {
   // Logging middleware //
-  app.use(morgan('dev'));
+  app.use(morgan("dev"));
   // Body-parsing middleware //
   app.use(bodyParser.json());
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -54,10 +54,10 @@ const createApp = () => {
   sessionStore.sync();
   app.use(
     session({
-      secret: process.env.SESSION_SECRET || 'a wildly insecure secret',
+      secret: process.env.SESSION_SECRET || "a wildly insecure secret",
       store: sessionStore,
       resave: false,
-      saveUninitialized: false,
+      saveUninitialized: false
     })
   );
 
@@ -66,14 +66,14 @@ const createApp = () => {
   app.use(passport.session());
 
   // Auth and API routes //
-  app.use('/auth', require('./auth'));
-  app.use('/api', require('./api'));
+  app.use("/auth", require("./auth"));
+  app.use("/api", require("./api"));
 
   // Error handling middleware //
   app.use((err, req, res, next) => {
     console.error(err);
     console.error(err.stack);
-    res.status(err.status || 500).send(err.message || 'Internal server error.');
+    res.status(err.status || 500).send(err.message || "Internal server error.");
   });
 };
 

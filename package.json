@@ -1,5 +1,5 @@
 {
-  "name": "server-boilerplate",
+  "name": "kanji-go",
   "version": "1.0.0",
   "description": "A simple, lightweight boilerplate for backend services in ExpressJS",
   "main": "server/app.js",
@@ -48,7 +48,8 @@
     "passport-google-oauth": "^2.0.0",
     "pg": "^7.18.2",
     "pg-hstore": "^2.3.3",
-    "sequelize": "^5.21.5"
+    "sequelize": "^5.21.5",
+    "unofficial-jisho-api": "^2.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
