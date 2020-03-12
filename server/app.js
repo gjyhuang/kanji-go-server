@@ -7,6 +7,7 @@ const compression = require("compression");
 const bodyParser = require("body-parser");
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const db = require("./db");
+require("dotenv").config();
 // const path = require('path');
 
 const PORT = process.env.PORT || 1337;
