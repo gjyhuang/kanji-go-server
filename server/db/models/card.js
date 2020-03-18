@@ -5,10 +5,6 @@ const Card = db.define("card", {
   type: {
     type: Sequelize.ENUM("kanji", "vocab", "custom")
   },
-  status: {
-    type: Sequelize.STRING,
-    allowNull: false
-  },
   content: {
     type: Sequelize.STRING,
     allowNull: false
