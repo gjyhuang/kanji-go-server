@@ -1,7 +1,7 @@
 {
   "name": "kanji-go",
   "version": "1.0.0",
-  "description": "A simple, lightweight boilerplate for backend services in ExpressJS",
+  "description": "Backend services for Kanji-Go",
   "main": "server/app.js",
   "scripts": {
     "start": "NODE_ENV='development' nodemon server/app.js",
@@ -30,7 +30,7 @@
     "type": "git",
     "url": "git+https://github.com/AreaFiftyTwo/server-boilerplate.git"
   },
-  "author": "Michael McManus, Grace Huang",
+  "author": "Grace Huang",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AreaFiftyTwo/server-boilerplate/issues"
