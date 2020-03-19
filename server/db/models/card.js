@@ -23,10 +23,7 @@ const Card = db.define("card", {
   radical: {
     type: Sequelize.STRING
   },
-  examples: {
-    type: Sequelize.ARRAY(Sequelize.STRING)
-  },
-  examplesTranslation: {
+  tags: {
     type: Sequelize.ARRAY(Sequelize.STRING)
   }
 });

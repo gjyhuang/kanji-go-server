@@ -6,9 +6,10 @@ const DeckListDeck = require("./deckListDeck");
 const Card = require("./card");
 const CardStatus = require("./cardStatus");
 const DeckCard = require("./deckCard");
+const Example = require("./example");
+const CardExample = require("./cardExample");
 
 // each user has many deck lists -> through table for decks <-> users
-
 User.hasOne(DeckList);
 
 // each deck can be in many deck lists -> through table for deckLists <-> decks
@@ -30,13 +31,16 @@ DeckStatus.hasOne(DeckListDeck, {
 Deck.belongsToMany(Card, {
   through: "deckCard"
 });
-Card.belongsToMany(Deck, {
-  through: "deckCard"
-});
 
 // associate cardStatus with card via the through table
 CardStatus.hasOne(DeckCard, {
   as: "cardStatusId"
+});
+
+// each card can have many examples
+// through table for cards <-> examples
+Card.belongsToMany(Example, {
+  through: "cardExample"
 });
 
 module.exports = {
@@ -47,5 +51,7 @@ module.exports = {
   DeckStatus,
   Card,
   CardStatus,
-  DeckCard
+  DeckCard,
+  Example,
+  CardExample
 };
