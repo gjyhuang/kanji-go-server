@@ -3,6 +3,7 @@ const router = require("express").Router();
 router.use("/users", require("./users"));
 router.use("/entries", require("./entries"));
 router.use("/decks", require("./decks"));
+router.use("/cards", require("./cards"));
 
 router.use((req, res, next) => {
   const err = new Error("Oops! Not found.");
