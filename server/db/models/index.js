@@ -31,6 +31,9 @@ DeckStatus.hasOne(DeckListDeck, {
 Deck.belongsToMany(Card, {
   through: "deckCard"
 });
+Card.belongsToMany(Deck, {
+  through: "deckCard"
+});
 
 // associate cardStatus with card via the through table
 CardStatus.hasOne(DeckCard, {
@@ -40,6 +43,9 @@ CardStatus.hasOne(DeckCard, {
 // each card can have many examples
 // through table for cards <-> examples
 Card.belongsToMany(Example, {
+  through: "cardExample"
+});
+Example.belongsToMany(Card, {
   through: "cardExample"
 });
 
