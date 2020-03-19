@@ -25,10 +25,38 @@ router.post("/", async (req, res, next) => {
   }
 });
 
-router.put("/:userId", (req, res, next) => {
-  res.send("Hello put");
+router.get("/:deckId", async (req, res, next) => {
+  try {
+    const deck = await Deck.findByPk(req.params.deckId, {
+      include: [{ model: Card }]
+    });
+    res.json(deck);
+  } catch (err) {
+    next(err);
+  }
 });
 
-router.delete("/:userId", (req, res, next) => {
-  res.send("Goodbye world");
+router.put("/:deckId", async (req, res, next) => {
+  try {
+    const { deckId } = req.params;
+    const deckToUpdate = await Deck.findByPk(deckId);
+    const { name, description } = req.body;
+    const updatedData = { name, description };
+    deckToUpdate.update(updatedData);
+    res.status(200).json(deckToUpdate);
+  } catch (err) {
+    next(err);
+  }
+});
+
+router.delete("/:deckId", async (req, res, next) => {
+  try {
+    const { deckId } = req.params;
+    await Deck.destroy({
+      where: { id: deckId }
+    });
+    res.sendStatus(200);
+  } catch (err) {
+    next(err);
+  }
 });
