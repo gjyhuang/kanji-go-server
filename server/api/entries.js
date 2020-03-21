@@ -20,8 +20,9 @@ router.get("/:kanji", async (req, res, next) => {
       headers: { "x-rapidapi-key": key }
     });
     // to find jlpt level
-    const search = await jisho.searchForPhrase(kanji);
-    res.send({ ...data, jlpt: search.data[0].jlpt });
+    // const search = await jisho.searchForPhrase(kanji);
+    // res.send({ ...data, jlpt: search.data[0].jlpt });
+    res.send(data);
   } catch (err) {
     next(err);
   }

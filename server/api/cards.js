@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { Deck, Card } = require("../db/models/index");
+const { Deck, Card, Example } = require("../db/models/index");
 
 module.exports = router;
 
@@ -9,6 +9,10 @@ router.get("/", async (req, res, next) => {
       include: [
         {
           model: Deck,
+          required: false
+        },
+        {
+          model: Example,
           required: false
         }
       ]
