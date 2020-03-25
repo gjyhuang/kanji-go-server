@@ -3,7 +3,7 @@ const db = require("../db");
 
 const DeckListDeck = db.define("deckListDeck", {
   deckId: {
-    type: Sequelize.UUID,
+    type: Sequelize.INTEGER,
     allowNull: false,
     references: {
       model: "deck",
@@ -11,7 +11,7 @@ const DeckListDeck = db.define("deckListDeck", {
     }
   },
   deckListId: {
-    type: Sequelize.UUID,
+    type: Sequelize.INTEGER,
     allowNull: false,
     references: {
       model: "deckList",
