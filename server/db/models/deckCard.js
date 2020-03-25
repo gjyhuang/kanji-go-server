@@ -22,7 +22,7 @@ const DeckCard = db.define("deckCard", {
     type: Sequelize.INTEGER,
     allowNull: false,
     references: {
-      model: "card",
+      model: "cardStatus",
       key: "id"
     }
   }
